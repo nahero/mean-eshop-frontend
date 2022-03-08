@@ -1,0 +1,50 @@
+.logo {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    img {
+        max-height: 120px;
+    }
+}
+
+.admin-sidebar {
+    height: 100%;
+    width: 175px;
+    background-color: #252525;
+}
+
+.admin-nav {
+    margin-top: 10px;
+
+    ul {
+        li {
+            a {
+                padding: 12px 15px;
+                font-size: 13px;
+                color: var(--gray-400);
+                background-color: none;
+                // transition: all 0.15s ease-out;
+
+                &:hover {
+                    color: var(--gray-50);
+                    background-color: var(--cyan-700);
+                }
+
+                i {
+                    margin-right: 10px;
+                }
+
+                &.logout {
+                    color: var(--cyan-500);
+                    &:hover {
+                        color: var(--cyan-200);
+                    }
+                }
+                &.active {
+                    background-color: var(--cyan-800);
+                    color: var(--gray-50);
+                }
+            }
+        }
+    }
+}

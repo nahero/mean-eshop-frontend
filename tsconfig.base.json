@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nx-repo/orders": ["libs/orders/src/index.ts"],
+      "@nx-repo/products": ["libs/products/src/index.ts"],
+      "@nx-repo/ui": ["libs/ui/src/index.ts"],
+      "@nx-repo/users": ["libs/users/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
