@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriesService, Category } from '@nx-repo/products';
 
 @Component({
     selector: 'admin-categories-list',
@@ -6,14 +7,20 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
-    constructor() {}
+    constructor(private categoriesService: CategoriesService) {}
 
-    categories = [
-        { id: 1, name: 'Mobile', products: 15 },
-        { id: 2, name: 'Gadgets', products: 148 },
-        { id: 3, name: 'Desktop', products: 27 },
-        { id: 4, name: 'Keyboards', products: 22 }
-    ];
+    categories: Category[] = [];
 
-    ngOnInit(): void {}
+    /**
+     * Gets categories from categoriesService as array of Category int
+     */
+    getCategories() {
+        this.categoriesService.getCategories().subscribe((cats) => {
+            this.categories = cats;
+        });
+    }
+
+    ngOnInit(): void {
+        this.getCategories();
+    }
 }
