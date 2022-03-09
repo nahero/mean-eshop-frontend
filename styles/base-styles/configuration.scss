@@ -1,12 +1,13 @@
 // We have to add p-component to override PrimeNG fonts
 body {
-    &,
-    .p-component {
-        font-size: 12px;
-        font-family: -apple-system, 'system-ui';
-    }
+  background-color: var(--surface-ground);
+  &,
+  .p-component {
+    // font-size: 12px;
+    font-family: -apple-system, 'system-ui';
+  }
 }
 
 ul {
-    @include reset-list;
+  @include reset-list;
 }
