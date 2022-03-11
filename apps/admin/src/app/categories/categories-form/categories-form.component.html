@@ -6,7 +6,13 @@
         <p-toolbar>
           <div class="p-toolbar-group-left"></div>
           <div class="p-toolbar-group-right">
-            <p-button icon="pi pi-check" styleClass="p-button" class="mr-2" label="Create"></p-button>
+            <p-button
+              icon="pi pi-check"
+              styleClass="p-button"
+              class="mr-2"
+              label="Create"
+              (onClick)="onSubmit()"
+            ></p-button>
             <p-button icon="pi pi-times" styleClass="p-button-secondary p-button-outlined" label="Cancel"></p-button>
           </div>
         </p-toolbar>
@@ -14,19 +20,21 @@
     </div>
 
     <!-- Form -->
-    <form action="">
+    <form [formGroup]="form">
       <div class="grid p-fluid mt-4">
         <div class="col-6">
           <span class="p-float-label">
-            <input id="name" type="text" pInputText />
+            <input formControlName="name" id="name" type="text" pInputText />
             <label for="name">Name</label>
           </span>
+          <small class="p-invalid">Name is required</small>
         </div>
         <div class="col-6">
           <span class="p-float-label">
-            <input id="icon" type="text" pInputText />
+            <input formControlName="icon" id="icon" type="text" pInputText />
             <label for="icon">Icon</label>
           </span>
+          <small class="p-invalid">Icon is required</small>
         </div>
       </div>
     </form>
