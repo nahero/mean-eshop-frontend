@@ -1,8 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@nx-repo/products';
 import { ToastService } from '@nx-repo/ui';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'admin-categories-form',
@@ -22,7 +24,8 @@ export class CategoriesFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -48,17 +51,32 @@ export class CategoriesFormComponent implements OnInit {
       name: this.form.controls['name'].value,
       icon: this.form.controls['icon'].value
     };
-    this.categoriesService.createCategory(this.category).subscribe();
 
-    this.toastService.categoryCreatedMessage(this.category.name);
-    this.goBack();
+    // Is there a better way to return category name to the 'complete' callback?
+    const name = this.category.name;
+    this.categoriesService.createCategory(this.category).subscribe({
+      // next: (v) => console.log(v),
+      complete: () => {
+        this.toastService.categoryCreatedMessage(name);
+        // this.goBack();
+        timer(2000)
+          .toPromise()
+          .then((done) => {
+            this.goBack();
+          });
+      },
+      error: (e) => {
+        this.toastService.displayMessage('Category not created:', e.message, 'error');
+      }
+    });
   }
 
   /**
    * Back to Categories list
    */
   goBack() {
-    this.router.navigate(['categories']);
+    this.location.back();
+    // this.router.navigate(['categories']);
     // this.toastService.displayMessage('Router', 'Going back to categories', 'info');
   }
 }

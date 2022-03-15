@@ -26,16 +26,20 @@
         <p-table [value]="categories" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
           <ng-template pTemplate="header">
             <tr>
-              <th>ID</th>
               <th>Name</th>
+              <th>ID</th>
               <th>Icon</th>
               <th>Color</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-category>
             <tr>
-              <td>{{ category._id }}</td>
-              <td>{{ category.name }}</td>
+              <td>
+                <strong>{{ category.name }}</strong>
+              </td>
+              <td>
+                <small>{{ category._id }}</small>
+              </td>
               <td><i class="{{ 'pi pi-' + category.icon }}"></i></td>
               <td>{{ category.color }}</td>
             </tr>

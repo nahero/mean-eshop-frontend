@@ -20,6 +20,6 @@ export class CategoriesService {
    * @param category
    */
   createCategory(category: Category) {
-    return this.httpClient.post('http://localhost:3000/api/v1/categories', category);
+    return this.httpClient.post<Category>('http://localhost:3000/api/v1/categories', category);
   }
 }
