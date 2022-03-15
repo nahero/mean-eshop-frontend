@@ -20,7 +20,9 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastService } from '@nx-repo/ui';
 import { MessageService } from 'primeng/api';
+// import { MessageService } from 'primeng/api';
 
 const UX_MODULES = [CardModule, ToolbarModule, ButtonModule, TableModule, InputTextModule, ToastModule];
 
@@ -75,7 +77,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
     ...UX_MODULES
   ],
-  providers: [CategoriesService, MessageService],
+  providers: [CategoriesService, ToastService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

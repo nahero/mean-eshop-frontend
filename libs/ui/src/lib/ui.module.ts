@@ -5,13 +5,7 @@ import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    BannerComponent,
-    SliderComponent
-  ],
-  exports: [
-    BannerComponent,
-    SliderComponent
-  ]
+  declarations: [BannerComponent, SliderComponent],
+  exports: [BannerComponent, SliderComponent]
 })
 export class UiModule {}

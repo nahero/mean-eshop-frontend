@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@nx-repo/products';
-import { MessageService } from 'primeng/api';
+import { ToastService } from '@nx-repo/ui';
 
 @Component({
   selector: 'admin-categories-form',
@@ -21,7 +21,7 @@ export class CategoriesFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
-    private messageService: MessageService,
+    private toastService: ToastService,
     private router: Router
   ) {}
 
@@ -50,7 +50,7 @@ export class CategoriesFormComponent implements OnInit {
     };
     this.categoriesService.createCategory(this.category).subscribe();
 
-    this.displayMessage(this.category.name);
+    this.toastService.categoryCreatedMessage(this.category.name);
     this.goBack();
   }
 
@@ -59,27 +59,6 @@ export class CategoriesFormComponent implements OnInit {
    */
   goBack() {
     this.router.navigate(['categories']);
-  }
-
-  /**
-   * Toast message functions
-   */
-  displayMessage(category: string) {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Category created',
-      detail: `Category "${category}" was created successfully`
-    });
-  }
-
-  displayMessageMultiple() {
-    this.messageService.addAll([
-      { severity: 'success', summary: 'Service Message', detail: 'Via MessageService' },
-      { severity: 'info', summary: 'Info Message', detail: 'Via MessageService' }
-    ]);
-  }
-
-  clear() {
-    this.messageService.clear();
+    // this.toastService.displayMessage('Router', 'Going back to categories', 'info');
   }
 }
