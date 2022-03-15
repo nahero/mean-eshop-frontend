@@ -5,9 +5,21 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CategoriesService {
-    constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
-    getCategories(): Observable<Category[]> {
-        return this.httpClient.get<Category[]>('http://localhost:3000/api/v1/categories');
-    }
+  /**
+   *
+   * @returns all categories from database
+   */
+  getCategories(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>('http://localhost:3000/api/v1/categories');
+  }
+
+  /**
+   * Creates a new category
+   * @param category
+   */
+  createCategory(category: Category) {
+    return this.httpClient.post('http://localhost:3000/api/v1/categories', category);
+  }
 }
