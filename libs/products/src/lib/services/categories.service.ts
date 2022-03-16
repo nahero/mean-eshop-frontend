@@ -19,7 +19,7 @@ export class CategoriesService {
    * Creates a new category
    * @param category
    */
-  createCategory(category: Category) {
+  createCategory(category: Category): Observable<Category> {
     return this.httpClient.post<Category>('http://localhost:3000/api/v1/categories', category);
   }
 
@@ -27,7 +27,9 @@ export class CategoriesService {
    * Deletes a category
    * @param categoryID is category._id
    */
-  deleteCategory(categoryID: string | undefined) {
+  deleteCategory(categoryID: string): Observable<Category> {
+    console.log(categoryID);
+
     return this.httpClient.delete<Category>('http://localhost:3000/api/v1/categories/' + categoryID);
   }
 }

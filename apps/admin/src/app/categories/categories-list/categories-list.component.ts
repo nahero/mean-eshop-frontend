@@ -24,10 +24,10 @@ export class CategoriesListComponent implements OnInit {
   /**
    * Deletes selected category
    */
-  deleteCategory(category: Category) {
-    this.categoriesService.deleteCategory(category._id).subscribe({
+  deleteCategory(categoryID: string) {
+    this.categoriesService.deleteCategory(categoryID).subscribe({
       next: () => {
-        this.toastService.displayMessage('Category Deleted', `Category ${category.name} was deleted successfully`);
+        this.toastService.displayMessage('Category Deleted', 'Category was deleted successfully');
       },
       complete: () => {
         this.getCategories();
