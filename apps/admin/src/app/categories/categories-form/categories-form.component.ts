@@ -52,19 +52,15 @@ export class CategoriesFormComponent implements OnInit {
       icon: this.form.controls['icon'].value
     };
 
-    // Is there a better way to return category name to the 'complete' callback?
-    const name = this.category.name;
     this.categoriesService.createCategory(this.category).subscribe({
-      // next: (v) => console.log(v),
-      complete: () => {
-        this.toastService.categoryCreatedMessage(name);
-        // this.goBack();
-        timer(2000)
-          .toPromise()
-          .then((done) => {
-            this.goBack();
-          });
+      next: (response) => {
+        this.toastService.categoryCreatedMessage(response.name);
+        timer(2000).subscribe(() => {
+          this.goBack();
+        });
       },
+      // complete: () => {
+      // },
       error: (e) => {
         this.toastService.displayMessage('Category not created:', e.message, 'error');
       }
