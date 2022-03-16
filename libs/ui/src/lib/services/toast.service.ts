@@ -30,7 +30,7 @@ export class ToastService {
   categoryDeletedMessage(categoryName: string) {
     this.messageService.add({
       severity: 'success',
-      summary: 'Category created',
+      summary: 'Category deleted',
       detail: `Category "${categoryName}" was created successfully`
     });
   }

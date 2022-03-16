@@ -22,4 +22,12 @@ export class CategoriesService {
   createCategory(category: Category) {
     return this.httpClient.post<Category>('http://localhost:3000/api/v1/categories', category);
   }
+
+  /**
+   * Deletes a category
+   * @param categoryID is category._id
+   */
+  deleteCategory(categoryID: string | undefined) {
+    return this.httpClient.delete<Category>('http://localhost:3000/api/v1/categories/' + categoryID);
+  }
 }
