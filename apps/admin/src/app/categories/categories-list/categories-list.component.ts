@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService, Category } from '@nx-repo/products';
 import { ToastService } from '@nx-repo/ui';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'admin-categories-list',
@@ -8,9 +9,17 @@ import { ToastService } from '@nx-repo/ui';
   styleUrls: ['./categories-list.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
-  constructor(private categoriesService: CategoriesService, private toastService: ToastService) {}
+  constructor(
+    private categoriesService: CategoriesService,
+    private toastService: ToastService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   categories: Category[] = [];
+
+  ngOnInit(): void {
+    this.getCategories();
+  }
 
   /**
    * Gets categories from categoriesService as array of Category int
@@ -22,23 +31,26 @@ export class CategoriesListComponent implements OnInit {
   }
 
   /**
-   * Deletes selected category
+   * Delete selected category after confirmation
    */
-  deleteCategory(categoryID: string) {
-    this.categoriesService.deleteCategory(categoryID).subscribe({
-      next: () => {
-        this.toastService.displayMessage('Category Deleted', 'Category was deleted successfully');
-      },
-      complete: () => {
-        this.getCategories();
-      },
-      error: (e) => {
-        this.toastService.displayMessage('Category not deleted:', e.message, 'error');
+  deleteCategory(categoryName: string, categoryID: string) {
+    // Display confirmation dialog
+    this.confirmationService.confirm({
+      message: `Are you sure you want to delete <strong>${categoryName}</strong>?`,
+      accept: () => {
+        // Perform deletion on confirm
+        this.categoriesService.deleteCategory(categoryID).subscribe({
+          next: () => {
+            this.toastService.displayMessage('Category Deleted', 'Category was deleted successfully');
+          },
+          complete: () => {
+            this.getCategories();
+          },
+          error: (e) => {
+            this.toastService.displayMessage('Category not deleted:', e.message, 'error');
+          }
+        });
       }
     });
-  }
-
-  ngOnInit(): void {
-    this.getCategories();
   }
 }
