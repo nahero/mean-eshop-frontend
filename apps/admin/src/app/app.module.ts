@@ -58,6 +58,10 @@ const routes: Routes = [
         component: CategoriesFormComponent
       },
       {
+        path: 'categories-form/:id',
+        component: CategoriesFormComponent
+      },
+      {
         path: 'orders',
         component: DashboardComponent
       },

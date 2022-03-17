@@ -45,6 +45,11 @@
               <td>{{ category.color }}</td>
               <td>
                 <p-button
+                  icon="pi pi-pencil"
+                  styleClass="p-button-info p-button-outlined p-button-sm p-button-text mr-2"
+                  (onClick)="editCategory(category._id)"
+                ></p-button>
+                <p-button
                   icon="pi pi-trash"
                   styleClass="p-button-danger p-button-outlined p-button-sm p-button-text"
                   (onClick)="deleteCategory(category.name, category._id)"

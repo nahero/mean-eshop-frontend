@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService, Category } from '@nx-repo/products';
 import { ToastService } from '@nx-repo/ui';
 import { ConfirmationService } from 'primeng/api';
@@ -12,7 +13,8 @@ export class CategoriesListComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private toastService: ToastService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
   ) {}
 
   categories: Category[] = [];
@@ -28,6 +30,13 @@ export class CategoriesListComponent implements OnInit {
     this.categoriesService.getCategories().subscribe((cats) => {
       this.categories = cats;
     });
+  }
+
+  /**
+   * Edit category
+   */
+  editCategory(categoryID: string) {
+    this.router.navigateByUrl(`/categories-form/${categoryID}`);
   }
 
   /**

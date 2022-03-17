@@ -1,5 +1,5 @@
 <div class="admin-page">
-  <p-card header="Create Category" subheader="Add or edit your categories">
+  <p-card [header]="isEditMode ? 'Edit Category' : 'Create Category'" subheader="Add or edit your categories">
     <div class="grid">
       <div class="col">
         <!-- Toolbar -->
@@ -10,8 +10,8 @@
               icon="pi pi-check"
               styleClass="p-button"
               class="mr-2"
-              label="Create"
-              (onClick)="onSubmit()"
+              [label]="isEditMode ? 'Update' : 'Create'"
+              (onClick)="isEditMode ? updateCategory() : createCategory()"
             ></p-button>
             <p-button
               icon="pi pi-times"
