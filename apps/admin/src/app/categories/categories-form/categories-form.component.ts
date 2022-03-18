@@ -21,6 +21,7 @@ export class CategoriesFormComponent implements OnInit {
   category: Category | undefined;
   isEditMode = false;
   currentCategoryID: string | undefined;
+  color: string | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,7 +35,8 @@ export class CategoriesFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
-      icon: ['', Validators.required]
+      icon: ['', Validators.required],
+      color: ['']
     });
 
     this._checkAndSetEditMode();
@@ -48,7 +50,8 @@ export class CategoriesFormComponent implements OnInit {
 
     this.category = {
       name: this.form.controls['name'].value,
-      icon: this.form.controls['icon'].value
+      icon: this.form.controls['icon'].value,
+      color: this.form.controls['color'].value
     };
 
     this.categoriesService.createCategory(this.category).subscribe({
@@ -73,7 +76,8 @@ export class CategoriesFormComponent implements OnInit {
     this.category = {
       _id: this.currentCategoryID,
       name: this.form.controls['name'].value,
-      icon: this.form.controls['icon'].value
+      icon: this.form.controls['icon'].value,
+      color: this.form.controls['color'].value
     };
 
     this.categoriesService.updateCategory(this.category).subscribe({
@@ -96,6 +100,7 @@ export class CategoriesFormComponent implements OnInit {
     this.categoriesService.getCategory(categoryID).subscribe((category) => {
       this.form.controls['name'].setValue(category.name);
       this.form.controls['icon'].setValue(category.icon);
+      this.form.controls['color'].setValue(category.color);
     });
   }
 

@@ -42,7 +42,9 @@
                 <small>{{ category._id }}</small>
               </td>
               <td><i class="{{ 'pi pi-' + category.icon }}"></i></td>
-              <td>{{ category.color }}</td>
+              <td>
+                <div class="colorSwatch" [ngStyle]="{ 'background-color': category.color }"></div>
+              </td>
               <td>
                 <p-button
                   icon="pi pi-pencil"

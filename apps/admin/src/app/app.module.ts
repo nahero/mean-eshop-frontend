@@ -24,6 +24,7 @@ import { ToastService } from '@nx-repo/ui';
 import { MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { ColorPickerModule } from 'primeng/colorpicker';
 // import { MessageService } from 'primeng/api';
 
 const UX_MODULES = [
@@ -33,7 +34,8 @@ const UX_MODULES = [
   TableModule,
   InputTextModule,
   ToastModule,
-  ConfirmDialogModule
+  ConfirmDialogModule,
+  ColorPickerModule
 ];
 
 const routes: Routes = [

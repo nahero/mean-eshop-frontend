@@ -27,18 +27,30 @@
     <!-- Form -->
     <form [formGroup]="form">
       <div class="grid p-fluid mt-4">
-        <div class="col-6">
+        <div class="col-5">
           <div class="p-field">
             <label for="name">Name</label>
             <input formControlName="name" id="name" type="text" pInputText />
             <small *ngIf="form.controls['name'].invalid && isSubmitted" class="p-error">Name is required</small>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-5">
           <div class="p-field">
             <label for="icon">Icon</label>
             <input formControlName="icon" id="icon" type="text" pInputText />
             <small *ngIf="form.controls['icon'].invalid && isSubmitted" class="p-error">Icon is required</small>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="p-field">
+            <label for="color">Color</label>
+            <p-colorPicker
+              class="block mt-1"
+              formControlName="color"
+              [(ngModel)]="color"
+              [showTransitionOptions]="'200ms'"
+              [hideTransitionOptions]="'200ms'"
+            ></p-colorPicker>
           </div>
         </div>
       </div>
