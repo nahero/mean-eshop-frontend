@@ -23,28 +23,28 @@
     <!-- Table -->
     <div class="grid">
       <div class="col">
-        <p-table [value]="categories" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+        <p-table [value]="categories" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
           <ng-template pTemplate="header">
             <tr>
-              <th>Name</th>
-              <th>ID</th>
-              <th>Icon</th>
-              <th>Color</th>
-              <th>Actions</th>
+              <th pSortableColumn="name" style="width: 50%">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th style="width: 60px; text-align: center">Icon</th>
+              <th style="width: 60px; text-align: center">Color</th>
+              <th style="width: 100px">Actions</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-category>
             <tr>
+              <!-- Name -->
               <td>
                 <strong>{{ category.name }}</strong>
               </td>
-              <td>
-                <small>{{ category._id }}</small>
-              </td>
-              <td><i class="{{ 'pi pi-' + category.icon }}"></i></td>
-              <td>
+              <!-- Icon -->
+              <td style="text-align: center"><i class="{{ 'pi pi-' + category.icon }}"></i></td>
+              <!-- Color -->
+              <td style="text-align: center">
                 <div class="colorSwatch" [ngStyle]="{ 'background-color': category.color }"></div>
               </td>
+              <!-- Actions -->
               <td>
                 <p-button
                   icon="pi pi-pencil"

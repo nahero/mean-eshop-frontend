@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@nx-repo/products';
 import { ToastService } from '@nx-repo/ui';
 import { ConfirmationService } from 'primeng/api';
