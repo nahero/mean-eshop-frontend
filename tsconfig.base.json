@@ -18,7 +18,9 @@
       "@nx-repo/orders": ["libs/orders/src/index.ts"],
       "@nx-repo/products": ["libs/products/src/index.ts"],
       "@nx-repo/ui": ["libs/ui/src/index.ts"],
-      "@nx-repo/users": ["libs/users/src/index.ts"]
+      "@nx-repo/users": ["libs/users/src/index.ts"],
+      "@env/*": ["environments/*"],
+      // * is a wildcard and should be replaced with specific file name
     }
   },
   "exclude": ["node_modules", "tmp"]
