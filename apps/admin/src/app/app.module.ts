@@ -25,7 +25,7 @@ import { MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ColorPickerModule } from 'primeng/colorpicker';
-// import { MessageService } from 'primeng/api';
+import { ProductsListComponent } from './products/products-list/products-list.component';
 
 const UX_MODULES = [
   CardModule,
@@ -49,7 +49,7 @@ const routes: Routes = [
       },
       {
         path: 'products',
-        component: DashboardComponent
+        component: ProductsListComponent
       },
       {
         path: 'categories',
@@ -82,7 +82,8 @@ const routes: Routes = [
     ShellComponent,
     SidebarComponent,
     CategoriesListComponent,
-    CategoriesFormComponent
+    CategoriesFormComponent,
+    ProductsListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,78 @@
+<div class="admin-page">
+  <p-card header="Products" subheader="Manage your products">
+    <!-- Toolbar -->
+    <div class="grid">
+      <div class="col">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <p-button label="New Product" icon="pi pi-plus" class="mr-2" routerLink="/categories-form"></p-button>
+          </div>
+          <div class="p-toolbar-group-right">
+            <p-button
+              label="Refresh"
+              icon="pi pi-refresh"
+              styleClass="p-button-info p-button-outlined"
+              (onClick)=""
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="grid">
+      <div class="col">
+        <p-table [value]="products" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name" style="width: 50%">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th>Image</th>
+              <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+              <th pSortableColumn="stock" style="width: 60px; text-align: center">
+                In Stock <p-sortIcon field="stock"></p-sortIcon>
+              </th>
+              <th pSortableColumn="rating" style="width: 80px; text-align: center">
+                Rating <p-sortIcon field="rating"></p-sortIcon>
+              </th>
+              <th pSortableColumn="featured" style="width: 60px; text-align: right">
+                Featured <p-sortIcon field="featured"></p-sortIcon>
+              </th>
+              <th pSortableColumn="price" style="text-align: right">Price <p-sortIcon field="price"></p-sortIcon></th>
+              <th style="width: 100px">Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <!-- Name -->
+              <td>
+                <strong>{{ product.name }}</strong>
+              </td>
+              <!-- Image -->
+              <td><img src="{{ product.image }}" alt="" /></td>
+              <!-- Category -->
+              <td>{{ product.category }}</td>
+              <!-- In Stock -->
+              <td>{{ product.countInStock }}</td>
+              <!-- Rating -->
+              <td>{{ product.rating }} ({{ product.numReviews }})</td>
+              <!-- Featured -->
+              <td>{{ product.featured }}</td>
+              <!-- Actions -->
+              <td>
+                <p-button
+                  icon="pi pi-pencil"
+                  styleClass="p-button-info p-button-outlined p-button-sm p-button-text mr-2"
+                ></p-button>
+                <p-button
+                  icon="pi pi-trash"
+                  styleClass="p-button-danger p-button-outlined p-button-sm p-button-text"
+                ></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+  <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+</div>
