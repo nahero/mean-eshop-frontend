@@ -8,12 +8,7 @@
             <p-button label="New Product" icon="pi pi-plus" class="mr-2" routerLink="/categories-form"></p-button>
           </div>
           <div class="p-toolbar-group-right">
-            <p-button
-              label="Refresh"
-              icon="pi pi-refresh"
-              styleClass="p-button-info p-button-outlined"
-              (onClick)=""
-            ></p-button>
+            <p-button label="Refresh" icon="pi pi-refresh" styleClass="p-button-info p-button-outlined"></p-button>
           </div>
         </p-toolbar>
       </div>
@@ -25,20 +20,19 @@
         <p-table [value]="products" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
           <ng-template pTemplate="header">
             <tr>
-              <th pSortableColumn="name" style="width: 50%">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="name" style="width: 20%">Name <p-sortIcon field="name"></p-sortIcon></th>
               <th>Image</th>
-              <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
-              <th pSortableColumn="stock" style="width: 60px; text-align: center">
+              <th pSortableColumn="category.name">Category <p-sortIcon field="category"></p-sortIcon></th>
+              <th pSortableColumn="countInStock" style="text-align: center">
                 In Stock <p-sortIcon field="stock"></p-sortIcon>
               </th>
-              <th pSortableColumn="rating" style="width: 80px; text-align: center">
+              <th pSortableColumn="numReviews" style="width: 100px; text-align: center">
                 Rating <p-sortIcon field="rating"></p-sortIcon>
               </th>
-              <th pSortableColumn="featured" style="width: 60px; text-align: right">
-                Featured <p-sortIcon field="featured"></p-sortIcon>
-              </th>
+              <th pSortableColumn="isFeatured">Featured <p-sortIcon field="featured"></p-sortIcon></th>
+              <th pSortableColumn="dateCreated">Created <p-sortIcon field="dateCreated"></p-sortIcon></th>
               <th pSortableColumn="price" style="text-align: right">Price <p-sortIcon field="price"></p-sortIcon></th>
-              <th style="width: 100px">Actions</th>
+              <th>Actions</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-product>
@@ -48,15 +42,23 @@
                 <strong>{{ product.name }}</strong>
               </td>
               <!-- Image -->
-              <td><img src="{{ product.image }}" alt="" /></td>
+              <td><img src="{{ product.image }}" alt="" class="product-image" /></td>
               <!-- Category -->
-              <td>{{ product.category }}</td>
+              <td>{{ product.category.name }}</td>
               <!-- In Stock -->
               <td>{{ product.countInStock }}</td>
               <!-- Rating -->
               <td>{{ product.rating }} ({{ product.numReviews }})</td>
               <!-- Featured -->
-              <td>{{ product.featured }}</td>
+              <td>
+                <i class="pi pi-star-fill icon--featured" [ngClass]="{ isFeatured: product.isFeatured }"></i>
+              </td>
+              <!-- Date created -->
+              <td style="text-align: right">
+                <small>{{ product.dateCreated | date: 'd. MMM yyyy.' }}</small>
+              </td>
+              <!-- Price -->
+              <td style="text-align: right; font-weight: bold">$ {{ product.price }}</td>
               <!-- Actions -->
               <td>
                 <p-button

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 // SERVICES
-import { CategoriesService } from '@nx-repo/products';
+import { CategoriesService, ProductsService } from '@nx-repo/products';
 // COMPONENTS
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -94,7 +94,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
     ...UX_MODULES
   ],
-  providers: [CategoriesService, ToastService, MessageService, ConfirmationService],
+  providers: [CategoriesService, ProductsService, ToastService, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,0 +1,10 @@
+.product-image {
+  width: 80px;
+}
+
+.icon--featured {
+  color: var(--gray-300);
+  &.isFeatured {
+    color: var(--blue-500);
+  }
+}

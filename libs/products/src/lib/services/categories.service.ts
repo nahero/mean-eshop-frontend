@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../models/category';
 import { Observable } from 'rxjs';
-// { environment } is the const name, and @env/environment is file nam
+// { environment } is the const name, and @env/environment is file name
 import { environment } from '@env/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -45,8 +45,6 @@ export class CategoriesService {
    * @param categoryID is category._id
    */
   deleteCategory(categoryID: string): Observable<Category> {
-    console.log(categoryID);
-
     return this.httpClient.delete<Category>(`${this.apiURLcategories}/${categoryID}`);
   }
 }
