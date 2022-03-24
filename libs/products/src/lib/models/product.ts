@@ -1,7 +1,7 @@
 import { Category } from './category';
 
 export interface Product {
-  _id: string;
+  _id?: string;
   name: string;
   description?: string;
   richDescription?: string;
@@ -11,7 +11,8 @@ export interface Product {
   countInStock?: number;
   rating?: number;
   numReviews?: number;
-  category: Category;
-  isFeatured: boolean | false;
-  dateCreated: Date;
+  // category?: Category;
+  category?: string;
+  isFeatured?: boolean | false;
+  dateCreated?: Date;
 }

@@ -18,6 +18,8 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastService } from '@nx-repo/ui';
@@ -26,6 +28,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ProductsListComponent } from './products/products-list/products-list.component';
+import { ProductsFormComponent } from './products/products-form/products-form.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 const UX_MODULES = [
   CardModule,
@@ -33,9 +37,12 @@ const UX_MODULES = [
   ButtonModule,
   TableModule,
   InputTextModule,
+  InputNumberModule,
+  InputSwitchModule,
   ToastModule,
   ConfirmDialogModule,
-  ColorPickerModule
+  ColorPickerModule,
+  InputTextareaModule
 ];
 
 const routes: Routes = [
@@ -48,10 +55,6 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: 'products',
-        component: ProductsListComponent
-      },
-      {
         path: 'categories',
         component: CategoriesListComponent
       },
@@ -62,6 +65,18 @@ const routes: Routes = [
       {
         path: 'categories-form/:id',
         component: CategoriesFormComponent
+      },
+      {
+        path: 'products',
+        component: ProductsListComponent
+      },
+      {
+        path: 'products-form',
+        component: ProductsFormComponent
+      },
+      {
+        path: 'products-form/:id',
+        component: ProductsFormComponent
       },
       {
         path: 'orders',
@@ -83,7 +98,8 @@ const routes: Routes = [
     SidebarComponent,
     CategoriesListComponent,
     CategoriesFormComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    ProductsFormComponent
   ],
   imports: [
     BrowserModule,

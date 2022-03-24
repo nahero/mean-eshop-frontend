@@ -1,0 +1,85 @@
+<div class="admin-page">
+  <p-card [header]="isEditMode ? 'Edit Product' : 'Add Product'" subheader="Add or edit your products">
+    <div class="grid">
+      <div class="col">
+        <!-- Toolbar -->
+        <p-toolbar>
+          <div class="p-toolbar-group-left"></div>
+          <div class="p-toolbar-group-right">
+            <p-button
+              icon="pi pi-check"
+              styleClass="p-button"
+              class="mr-2"
+              [label]="isEditMode ? 'Update' : 'Create'"
+              (onClick)="isEditMode ? updateProduct() : createProduct()"
+            ></p-button>
+            <p-button
+              icon="pi pi-times"
+              styleClass="p-button-secondary p-button-outlined"
+              label="Cancel"
+              (onClick)="goBack()"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="form">
+      <div class="grid p-fluid mt-4">
+        <!-- Name -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="name">Name</label>
+            <input formControlName="name" id="name" type="text" pInputText />
+            <small *ngIf="productsForm['name'].invalid && isSubmitted" class="p-error">Name is required</small>
+          </div>
+        </div>
+        <!-- Price -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="price">Price</label>
+            <p-inputNumber formControlName="price" inputId="price" mode="decimal" [useGrouping]="true"></p-inputNumber>
+            <small *ngIf="productsForm['price'].invalid && isSubmitted" class="p-error">Price is required</small>
+          </div>
+        </div>
+        <!-- Count in stock -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="countInStock">In Stock</label>
+            <p-inputNumber
+              formControlName="countInStock"
+              inputId="countInStock"
+              mode="decimal"
+              [useGrouping]="false"
+              [min]="0"
+              [max]="255"
+            ></p-inputNumber>
+            <small *ngIf="productsForm['countInStock'].invalid && isSubmitted" class="p-error">Stock is required</small>
+          </div>
+        </div>
+        <!-- Featured -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="isFeatured">Featured</label> <br />
+            <p-inputSwitch formControlName="isFeatured" inputId="isFeatured" styleClass="block mt-1"></p-inputSwitch>
+          </div>
+        </div>
+        <!-- Description -->
+        <div class="col-12">
+          <div class="p-field">
+            <label for="description">Description</label>
+            <textarea
+              formControlName="description"
+              [rows]="5"
+              [cols]="30"
+              pInputTextarea
+              [autoResize]="true"
+            ></textarea>
+            <small *ngIf="productsForm['price'].invalid && isSubmitted" class="p-error">Price is required</small>
+          </div>
+        </div>
+      </div>
+    </form>
+  </p-card>
+</div>
