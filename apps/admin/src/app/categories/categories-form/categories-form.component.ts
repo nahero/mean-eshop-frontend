@@ -46,7 +46,9 @@ export class CategoriesFormComponent implements OnInit {
    * Submits form values
    */
   createCategory() {
-    this._checkIsFormSubmittedAndValid();
+    if (this._checkIsFormSubmittedAndValid()) return;
+
+    console.log('Moving on with category creation');
 
     this.category = {
       name: this.form.controls['name'].value,
@@ -71,7 +73,7 @@ export class CategoriesFormComponent implements OnInit {
    * Update current category
    */
   updateCategory() {
-    this._checkIsFormSubmittedAndValid();
+    if (this._checkIsFormSubmittedAndValid()) return;
 
     this.category = {
       _id: this.currentCategoryID,
@@ -118,17 +120,23 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   /**
-   * Form actions on submit
+   * Validate form fields
+   * @returns True if form is invalid
    */
-  private _checkIsFormSubmittedAndValid() {
-    this.isSubmitted = true;
-    if (this.form.invalid) {
-      return;
-    }
-
+  private _checkIsFormSubmittedAndValid(): boolean {
     console.group('Form values');
     console.log(this.form.controls['name'].value);
     console.log(this.form.controls['icon'].value);
+    console.log(this.form.controls['color'].value);
+
+    this.isSubmitted = true;
+    if (this.form.invalid) {
+      console.log('Form is invalid');
+      return true;
+    } else {
+      console.log('Form is valid');
+      return false;
+    }
   }
 
   /**

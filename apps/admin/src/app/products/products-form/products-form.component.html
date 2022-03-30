@@ -26,8 +26,8 @@
 
     <!-- Form -->
     <form [formGroup]="form">
+      <!-- Name -->
       <div class="grid p-fluid mt-4">
-        <!-- Name -->
         <div class="col-6">
           <div class="p-field">
             <label for="name">Name</label>
@@ -35,6 +35,7 @@
             <small *ngIf="productsForm['name'].invalid && isSubmitted" class="p-error">Name is required</small>
           </div>
         </div>
+
         <!-- Price -->
         <div class="col-6">
           <div class="p-field">
@@ -43,6 +44,7 @@
             <small *ngIf="productsForm['price'].invalid && isSubmitted" class="p-error">Price is required</small>
           </div>
         </div>
+
         <!-- Count in stock -->
         <div class="col-6">
           <div class="p-field">
@@ -52,12 +54,13 @@
               inputId="countInStock"
               mode="decimal"
               [useGrouping]="false"
-              [min]="0"
+              [min]="1"
               [max]="255"
             ></p-inputNumber>
             <small *ngIf="productsForm['countInStock'].invalid && isSubmitted" class="p-error">Stock is required</small>
           </div>
         </div>
+
         <!-- Featured -->
         <div class="col-6">
           <div class="p-field">
@@ -65,10 +68,39 @@
             <p-inputSwitch formControlName="isFeatured" inputId="isFeatured" styleClass="block mt-1"></p-inputSwitch>
           </div>
         </div>
-        <!-- Description -->
-        <div class="col-12">
+
+        <!-- Category -->
+        <div class="col-6">
           <div class="p-field">
-            <label for="description">Description</label>
+            <label for="category">Category</label>
+            <p-dropdown
+              formControlName="category"
+              [options]="categories"
+              optionLabel="name"
+              [filter]="true"
+              filterBy="name"
+              [showClear]="true"
+              placeholder="Select Category"
+            ></p-dropdown>
+            <small *ngIf="productsForm['category'].invalid && isSubmitted" class="p-error">Category is required</small>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="image">Image</label>
+            <!-- <p-fileUpload name="myfile[]" url="./upload.php" accept="image/*" [auto]="true"></p-fileUpload> -->
+            <!-- <small *ngIf="productsForm['image'].invalid && isSubmitted" class="p-error">Image is required</small> -->
+            <input type="file" accept="image/*" class="p-inputtext" (change)="onImageUpload($event)" />
+            <img [src]="imageDisplay" alt="" />
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="description">Short Description</label>
             <textarea
               formControlName="description"
               [rows]="5"
@@ -76,8 +108,16 @@
               pInputTextarea
               [autoResize]="true"
             ></textarea>
-            <small *ngIf="productsForm['price'].invalid && isSubmitted" class="p-error">Price is required</small>
+            <small *ngIf="productsForm['description'].invalid && isSubmitted" class="p-error"
+              >Description is required</small
+            >
           </div>
+        </div>
+
+        <!-- Rich Description -->
+        <div class="col-12">
+          <label for="richDescription">Product Details</label>
+          <p-editor formControlName="richDescription" [style]="{ height: '320px' }"></p-editor>
         </div>
       </div>
     </form>

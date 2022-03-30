@@ -27,6 +27,7 @@
     <!-- Form -->
     <form [formGroup]="form">
       <div class="grid p-fluid mt-4">
+        <!-- Name -->
         <div class="col-5">
           <div class="p-field">
             <label for="name">Name</label>
@@ -34,6 +35,8 @@
             <small *ngIf="form.controls['name'].invalid && isSubmitted" class="p-error">Name is required</small>
           </div>
         </div>
+
+        <!-- Icon -->
         <div class="col-5">
           <div class="p-field">
             <label for="icon">Icon</label>
@@ -41,6 +44,8 @@
             <small *ngIf="form.controls['icon'].invalid && isSubmitted" class="p-error">Icon is required</small>
           </div>
         </div>
+
+        <!-- Color -->
         <div class="col-2">
           <div class="p-field">
             <label for="color">Color</label>

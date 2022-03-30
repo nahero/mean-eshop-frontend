@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Product, ProductsService } from '@nx-repo/products';
+import { CategoriesService, Category, Product, ProductsService } from '@nx-repo/products';
 import { ToastService } from '@nx-repo/ui';
 import { timer } from 'rxjs';
 
@@ -17,10 +17,13 @@ export class ProductsFormComponent implements OnInit {
   isEditMode = false;
   product!: Product;
   currentProductID: string | undefined;
+  categories!: Category[];
+  imageDisplay!: string | ArrayBuffer;
 
   constructor(
     private formBuilder: FormBuilder,
     private productsService: ProductsService,
+    private categoriesService: CategoriesService,
     private toastService: ToastService,
     private activatedRoute: ActivatedRoute,
     private location: Location
@@ -28,6 +31,7 @@ export class ProductsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this._initFormGroup();
+    this.getCategories();
   }
 
   /**
@@ -59,10 +63,14 @@ export class ProductsFormComponent implements OnInit {
     this.product = {
       name: this.form.controls['name'].value,
       price: this.form.controls['price'].value,
+      image: 'http://localhost:3000/public/uploads/rc-car-blue.jpeg-1645784757737.jpeg',
       isFeatured: this.form.controls['isFeatured'].value,
       description: this.form.controls['description'].value,
-      category: '6202ad5fc7d6478ecbe7be45'
+      richDescription: this.form.controls['richDescription'].value,
+      // category: '6202ad5fc7d6478ecbe7be45'
+      category: this.form.controls['category'].value._id
     };
+    console.log('Product: ', this.product);
 
     this.productsService.createProduct(this.product).subscribe({
       next: (response) => {
@@ -83,17 +91,28 @@ export class ProductsFormComponent implements OnInit {
   updateProduct() {}
 
   /**
+   * Gets categories
+   */
+  getCategories() {
+    this.categoriesService.getCategories().subscribe((cats) => {
+      this.categories = cats;
+      console.group('Categories:');
+      console.table(this.categories);
+    });
+  }
+
+  /**
    * Initialize form group
    */
   private _initFormGroup() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      description: [''],
+      description: ['', Validators.required],
       richDescription: [''],
       image: [''],
       images: [''],
       price: ['', Validators.required],
-      countInStock: [''],
+      countInStock: ['', Validators.required],
       rating: [''],
       numReviews: [''],
       category: [''],
@@ -154,5 +173,14 @@ export class ProductsFormComponent implements OnInit {
    */
   get productsForm() {
     return this.form.controls;
+  }
+
+  /**
+   * On image upload
+   * @param event
+   */
+  onImageUpload(event: Event) {
+    // console.log('Image uploaded', event.target.);
+    // this.imageDisplay = event.target.file[0];
   }
 }
