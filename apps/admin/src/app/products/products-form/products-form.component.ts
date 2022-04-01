@@ -18,7 +18,7 @@ export class ProductsFormComponent implements OnInit {
   product!: Product;
   currentProductID: string | undefined;
   categories!: Category[];
-  imageDisplay!: string | ArrayBuffer;
+  imageDisplay!: string | ArrayBuffer | null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,7 +63,8 @@ export class ProductsFormComponent implements OnInit {
     this.product = {
       name: this.form.controls['name'].value,
       price: this.form.controls['price'].value,
-      image: 'http://localhost:3000/public/uploads/rc-car-blue.jpeg-1645784757737.jpeg',
+      // image: 'http://localhost:3000/public/uploads/rc-car-blue.jpeg-1645784757737.jpeg',
+      image: this.imageDisplay,
       isFeatured: this.form.controls['isFeatured'].value,
       description: this.form.controls['description'].value,
       richDescription: this.form.controls['richDescription'].value,
@@ -179,8 +180,16 @@ export class ProductsFormComponent implements OnInit {
    * On image upload
    * @param event
    */
-  onImageUpload(event: Event) {
-    // console.log('Image uploaded', event.target.);
-    // this.imageDisplay = event.target.file[0];
+  onImageUpload(event: any) {
+    const file = event.target.files[0];
+    console.log('Image uploaded', event.target.files[0]);
+
+    if (file) {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        this.imageDisplay = fileReader.result;
+      };
+      fileReader.readAsDataURL(file);
+    }
   }
 }

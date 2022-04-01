@@ -5,7 +5,7 @@ export interface Product {
   name: string;
   description?: string;
   richDescription?: string;
-  image: string;
+  image: string | ArrayBuffer | null;
   images?: [string];
   price: number;
   countInStock?: number;

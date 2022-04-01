@@ -93,7 +93,7 @@
             <!-- <p-fileUpload name="myfile[]" url="./upload.php" accept="image/*" [auto]="true"></p-fileUpload> -->
             <!-- <small *ngIf="productsForm['image'].invalid && isSubmitted" class="p-error">Image is required</small> -->
             <input type="file" accept="image/*" class="p-inputtext" (change)="onImageUpload($event)" />
-            <img [src]="imageDisplay" alt="" />
+            <img *ngIf="imageDisplay" [src]="imageDisplay" alt="" class="w-20rem" />
           </div>
         </div>
 
