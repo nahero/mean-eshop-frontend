@@ -87,6 +87,46 @@ export class ProductsFormComponent implements OnInit {
   }
 
   /**
+   * Submit Form data to create product
+   */
+  onSubmit() {
+    this.isSubmitted = true;
+    if (this.form.invalid) return;
+
+    /**
+     * FormData comes with basic JS, no need to import anything.
+     * FormData is necessary to send image file, not JSON.
+     */
+    const productFormData = new FormData();
+
+    Object.keys(this.productsForm).map((key) => {
+      console.log(key);
+      console.log(this.productsForm[key].value);
+
+      productFormData.append(key, this.productsForm[key].value);
+    });
+    this._addProduct(productFormData);
+  }
+
+  /**
+   * Add product using FormData
+   * @param productData
+   */
+  private _addProduct(productData: FormData) {
+    this.productsService.createProductWithFormData(productData).subscribe({
+      next: (response) => {
+        this.toastService.displayMessage('Product Created', `Product ${response.name} was successfully created`);
+      },
+      complete: () => {
+        this.goBackAfterDelay();
+      },
+      error: (e) => {
+        this.toastService.displayMessage('Product not created:', e.message, 'error');
+      }
+    });
+  }
+
+  /**
    * Submit form to update existing product
    */
   updateProduct() {}
@@ -113,11 +153,11 @@ export class ProductsFormComponent implements OnInit {
       image: [''],
       images: [''],
       price: ['', Validators.required],
-      countInStock: ['', Validators.required],
+      countInStock: [1, Validators.required],
       rating: [''],
       numReviews: [''],
       category: [''],
-      isFeatured: [''],
+      isFeatured: [false],
       dateCreated: ['']
     });
     this._checkAndSetEditMode();
@@ -185,6 +225,13 @@ export class ProductsFormComponent implements OnInit {
     console.log('Image uploaded', event.target.files[0]);
 
     if (file) {
+      /**
+       * We need to patch the actual image FILE to the form image property
+       * and then updateValueAndValidity of the image form field
+       */
+
+      this.form.patchValue({ image: file });
+      this.form.get('image')?.updateValueAndValidity();
       const fileReader = new FileReader();
       fileReader.onload = () => {
         this.imageDisplay = fileReader.result;

@@ -49,6 +49,14 @@ export class ProductsService {
   }
 
   /**
+   * Creates a new product from FormData
+   * @param product takes FormData object
+   */
+  createProductWithFormData(productData: FormData): Observable<Product> {
+    return this.httpClient.post<Product>(this.apiURLproducts, productData);
+  }
+
+  /**
    * Updates a specific product by ID
    * @param product
    */

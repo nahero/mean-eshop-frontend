@@ -11,7 +11,7 @@
               styleClass="p-button"
               class="mr-2"
               [label]="isEditMode ? 'Update' : 'Create'"
-              (onClick)="isEditMode ? updateProduct() : createProduct()"
+              (onClick)="isEditMode ? updateProduct() : onSubmit()"
             ></p-button>
             <p-button
               icon="pi pi-times"
@@ -77,12 +77,13 @@
               formControlName="category"
               [options]="categories"
               optionLabel="name"
+              optionValue="_id"
               [filter]="true"
               filterBy="name"
               [showClear]="true"
               placeholder="Select Category"
             ></p-dropdown>
-            <small *ngIf="productsForm['category'].invalid && isSubmitted" class="p-error">Category is required</small>
+            <small *ngIf="!productsForm['category'].value && isSubmitted" class="p-error">Category is required</small>
           </div>
         </div>
 
@@ -91,8 +92,8 @@
           <div class="p-field">
             <label for="image">Image</label>
             <!-- <p-fileUpload name="myfile[]" url="./upload.php" accept="image/*" [auto]="true"></p-fileUpload> -->
-            <!-- <small *ngIf="productsForm['image'].invalid && isSubmitted" class="p-error">Image is required</small> -->
             <input type="file" accept="image/*" class="p-inputtext" (change)="onImageUpload($event)" />
+            <small *ngIf="!productsForm['image'].value && isSubmitted" class="p-error">Image is required</small>
             <img *ngIf="imageDisplay" [src]="imageDisplay" alt="" class="w-20rem" />
           </div>
         </div>
