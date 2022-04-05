@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product, ProductsService } from '@nx-repo/products';
 
 @Component({
@@ -9,7 +10,7 @@ import { Product, ProductsService } from '@nx-repo/products';
 export class ProductsListComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService, private router: Router) {}
 
   ngOnInit(): void {
     console.log('Products list init');
@@ -31,5 +32,13 @@ export class ProductsListComponent implements OnInit {
     this.productsService.getProductsByCategory(categoryIDs).subscribe((prods) => {
       this.products = prods;
     });
+  }
+
+  /**
+   * Edit product
+   * @param productID
+   */
+  editProduct(productID: string) {
+    this.router.navigateByUrl(`/products/form/${productID}`);
   }
 }

@@ -36,7 +36,7 @@ export class CategoriesListComponent implements OnInit {
    * Edit category
    */
   editCategory(categoryID: string) {
-    this.router.navigateByUrl(`/categories-form/${categoryID}`);
+    this.router.navigateByUrl(`/categories/form/${categoryID}`);
   }
 
   /**

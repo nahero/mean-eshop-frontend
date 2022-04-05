@@ -60,8 +60,8 @@ export class ProductsService {
    * Updates a specific product by ID
    * @param product
    */
-  updateProduct(product: Product): Observable<Product> {
-    return this.httpClient.put<Product>(`${this.apiURLproducts}/${product._id}`, product);
+  updateProduct(productData: FormData, productID: string): Observable<Product> {
+    return this.httpClient.put<Product>(`${this.apiURLproducts}/${productID}`, productData);
   }
 
   /**

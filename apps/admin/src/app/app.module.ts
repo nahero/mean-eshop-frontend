@@ -65,11 +65,11 @@ const routes: Routes = [
         component: CategoriesListComponent
       },
       {
-        path: 'categories-form',
+        path: 'categories/form',
         component: CategoriesFormComponent
       },
       {
-        path: 'categories-form/:id',
+        path: 'categories/form/:id',
         component: CategoriesFormComponent
       },
       {
@@ -77,11 +77,11 @@ const routes: Routes = [
         component: ProductsListComponent
       },
       {
-        path: 'products-form',
+        path: 'products/form',
         component: ProductsFormComponent
       },
       {
-        path: 'products-form/:id',
+        path: 'products/form/:id',
         component: ProductsFormComponent
       },
       {

@@ -5,7 +5,7 @@
       <div class="col">
         <p-toolbar>
           <div class="p-toolbar-group-left">
-            <p-button label="New Product" icon="pi pi-plus" class="mr-2" routerLink="/products-form"></p-button>
+            <p-button label="New Product" icon="pi pi-plus" class="mr-2" routerLink="/products/form"></p-button>
           </div>
           <div class="p-toolbar-group-right">
             <p-button label="Refresh" icon="pi pi-refresh" styleClass="p-button-info p-button-outlined"></p-button>
@@ -64,6 +64,7 @@
                 <p-button
                   icon="pi pi-pencil"
                   styleClass="p-button-info p-button-outlined p-button-sm p-button-text mr-2"
+                  (onClick)="editProduct(product._id)"
                 ></p-button>
                 <p-button
                   icon="pi pi-trash"

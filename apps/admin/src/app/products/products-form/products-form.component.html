@@ -11,7 +11,7 @@
               styleClass="p-button"
               class="mr-2"
               [label]="isEditMode ? 'Update' : 'Create'"
-              (onClick)="isEditMode ? updateProduct() : onSubmit()"
+              (onClick)="onSubmit()"
             ></p-button>
             <p-button
               icon="pi pi-times"
@@ -32,7 +32,7 @@
           <div class="p-field">
             <label for="name">Name</label>
             <input formControlName="name" id="name" type="text" pInputText />
-            <small *ngIf="productsForm['name'].invalid && isSubmitted" class="p-error">Name is required</small>
+            <small *ngIf="productForm['name'].invalid && isSubmitted" class="p-error">Name is required</small>
           </div>
         </div>
 
@@ -41,7 +41,7 @@
           <div class="p-field">
             <label for="price">Price</label>
             <p-inputNumber formControlName="price" inputId="price" mode="decimal" [useGrouping]="true"></p-inputNumber>
-            <small *ngIf="productsForm['price'].invalid && isSubmitted" class="p-error">Price is required</small>
+            <small *ngIf="productForm['price'].invalid && isSubmitted" class="p-error">Price is required</small>
           </div>
         </div>
 
@@ -57,7 +57,7 @@
               [min]="1"
               [max]="255"
             ></p-inputNumber>
-            <small *ngIf="productsForm['countInStock'].invalid && isSubmitted" class="p-error">Stock is required</small>
+            <small *ngIf="productForm['countInStock'].invalid && isSubmitted" class="p-error">Stock is required</small>
           </div>
         </div>
 
@@ -83,7 +83,7 @@
               [showClear]="true"
               placeholder="Select Category"
             ></p-dropdown>
-            <small *ngIf="!productsForm['category'].value && isSubmitted" class="p-error">Category is required</small>
+            <small *ngIf="!productForm['category'].value && isSubmitted" class="p-error">Category is required</small>
           </div>
         </div>
 
@@ -93,7 +93,7 @@
             <label for="image">Image</label>
             <!-- <p-fileUpload name="myfile[]" url="./upload.php" accept="image/*" [auto]="true"></p-fileUpload> -->
             <input type="file" accept="image/*" class="p-inputtext" (change)="onImageUpload($event)" />
-            <small *ngIf="!productsForm['image'].value && isSubmitted" class="p-error">Image is required</small>
+            <small *ngIf="productForm['image'].invalid && isSubmitted" class="p-error">Image is required</small>
             <img *ngIf="imageDisplay" [src]="imageDisplay" alt="" class="w-20rem" />
           </div>
         </div>
@@ -109,7 +109,7 @@
               pInputTextarea
               [autoResize]="true"
             ></textarea>
-            <small *ngIf="productsForm['description'].invalid && isSubmitted" class="p-error"
+            <small *ngIf="productForm['description'].invalid && isSubmitted" class="p-error"
               >Description is required</small
             >
           </div>

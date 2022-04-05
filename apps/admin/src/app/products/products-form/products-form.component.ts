@@ -16,7 +16,7 @@ export class ProductsFormComponent implements OnInit {
   isSubmitted = false;
   isEditMode = false;
   product!: Product;
-  currentProductID: string | undefined;
+  currentProductID!: string;
   categories!: Category[];
   imageDisplay!: string | ArrayBuffer | null;
 
@@ -39,18 +39,29 @@ export class ProductsFormComponent implements OnInit {
    */
   getProduct(productID: string) {
     this.productsService.getProduct(productID).subscribe((product) => {
-      this.form.controls['name'].setValue(product.name);
-      this.form.controls['description'].setValue(product.description);
-      this.form.controls['richDescription'].setValue(product.richDescription);
-      this.form.controls['image'].setValue(product.image);
-      this.form.controls['images'].setValue(product.images);
-      this.form.controls['price'].setValue(product.price);
-      this.form.controls['countInStock'].setValue(product.countInStock);
-      this.form.controls['rating'].setValue(product.rating);
-      this.form.controls['numReviews'].setValue(product.numReviews);
-      this.form.controls['category'].setValue(product.category);
-      this.form.controls['isFeatured'].setValue(product.isFeatured);
-      this.form.controls['dateCreated'].setValue(product.dateCreated);
+      console.group('Product');
+      console.log(product);
+
+      this.productForm['name'].setValue(product.name);
+      this.productForm['description'].setValue(product.description);
+      this.productForm['richDescription'].setValue(product.richDescription);
+      this.productForm['image'].setValue(product.image);
+      this.productForm['images'].setValue(product.images);
+      this.productForm['price'].setValue(product.price);
+      this.productForm['countInStock'].setValue(product.countInStock);
+      this.productForm['rating'].setValue(product.rating);
+      this.productForm['numReviews'].setValue(product.numReviews);
+      this.productForm['category'].setValue(product.category?._id);
+      this.productForm['isFeatured'].setValue(product.isFeatured);
+      // this.form.controls['dateCreated'].setValue(product.dateCreated);
+
+      // when editing the product we set the imageDisplay to the URI of the image,
+      // we don't need the file as when adding product
+      this.imageDisplay = product.image;
+      if (this.isEditMode) {
+        this.productForm['image'].setValidators([]);
+        this.productForm['image'].updateValueAndValidity();
+      }
     });
   }
 
@@ -91,7 +102,10 @@ export class ProductsFormComponent implements OnInit {
    */
   onSubmit() {
     this.isSubmitted = true;
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      console.error('Form is invalid!');
+      return;
+    }
 
     /**
      * FormData comes with basic JS, no need to import anything.
@@ -99,13 +113,21 @@ export class ProductsFormComponent implements OnInit {
      */
     const productFormData = new FormData();
 
-    Object.keys(this.productsForm).map((key) => {
+    Object.keys(this.productForm).map((key) => {
       console.log(key);
-      console.log(this.productsForm[key].value);
+      console.log(this.productForm[key].value);
 
-      productFormData.append(key, this.productsForm[key].value);
+      productFormData.append(key, this.productForm[key].value);
     });
-    this._addProduct(productFormData);
+
+    if (this.isEditMode) {
+      console.group('Updating product');
+      console.log(productFormData);
+
+      this._updateProduct(productFormData);
+    } else {
+      this._addProduct(productFormData);
+    }
   }
 
   /**
@@ -129,7 +151,19 @@ export class ProductsFormComponent implements OnInit {
   /**
    * Submit form to update existing product
    */
-  updateProduct() {}
+  private _updateProduct(productFormData: FormData) {
+    this.productsService.updateProduct(productFormData, this.currentProductID).subscribe({
+      next: (response) => {
+        this.toastService.displayMessage('Product Updated', `Product ${response.name} was successfully updated`);
+      },
+      complete: () => {
+        this.goBackAfterDelay();
+      },
+      error: (e) => {
+        this.toastService.displayMessage('Product not created:', e.message, 'error');
+      }
+    });
+  }
 
   /**
    * Gets categories
@@ -148,23 +182,24 @@ export class ProductsFormComponent implements OnInit {
   private _initFormGroup() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
+      price: ['', Validators.required],
+      category: ['', Validators.required],
+      countInStock: [1, Validators.required],
       description: ['', Validators.required],
       richDescription: [''],
-      image: [''],
+      image: ['', Validators.required],
       images: [''],
-      price: ['', Validators.required],
-      countInStock: [1, Validators.required],
       rating: [''],
       numReviews: [''],
-      category: [''],
-      isFeatured: [false],
-      dateCreated: ['']
+      isFeatured: [false]
+      // dateCreated: ['']
     });
     this._checkAndSetEditMode();
   }
 
   /**
-   * Check for edit mode by checking if id exists in route params
+   * Check for edit mode by checking if id exists in route params,
+   * get product
    */
   private _checkAndSetEditMode() {
     this.activatedRoute.params.subscribe((params) => {
@@ -212,7 +247,7 @@ export class ProductsFormComponent implements OnInit {
   /**
    * Why is this getter used?
    */
-  get productsForm() {
+  get productForm() {
     return this.form.controls;
   }
 
