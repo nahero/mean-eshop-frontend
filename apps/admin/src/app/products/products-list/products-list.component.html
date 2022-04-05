@@ -8,7 +8,12 @@
             <p-button label="New Product" icon="pi pi-plus" class="mr-2" routerLink="/products/form"></p-button>
           </div>
           <div class="p-toolbar-group-right">
-            <p-button label="Refresh" icon="pi pi-refresh" styleClass="p-button-info p-button-outlined"></p-button>
+            <p-button
+              label="Refresh"
+              icon="pi pi-refresh"
+              styleClass="p-button-info p-button-outlined"
+              (onClick)="getProducts()"
+            ></p-button>
           </div>
         </p-toolbar>
       </div>
@@ -17,7 +22,15 @@
     <!-- Table -->
     <div class="grid">
       <div class="col">
-        <p-table [value]="products" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+        <p-table
+          [value]="products"
+          styleClass="p-datatable-gridlines p-datatable-sm"
+          responsiveLayout="scroll"
+          [paginator]="true"
+          [rows]="10"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[5, 10, 20]"
+        >
           <ng-template pTemplate="header">
             <tr>
               <th pSortableColumn="name" style="width: 20%">Name <p-sortIcon field="name"></p-sortIcon></th>
@@ -69,6 +82,7 @@
                 <p-button
                   icon="pi pi-trash"
                   styleClass="p-button-danger p-button-outlined p-button-sm p-button-text"
+                  (onClick)="deleteProduct(product.name, product._id)"
                 ></p-button>
               </td>
             </tr>
