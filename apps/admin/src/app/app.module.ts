@@ -33,6 +33,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
+import { UsersListComponent } from './users/users-list/users-list.component';
+import { UsersFormComponent } from './users/users-form/users-form.component';
+import { UsersService } from '@nx-repo/users';
 
 const UX_MODULES = [
   CardModule,
@@ -90,7 +93,15 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        component: DashboardComponent
+        component: UsersListComponent
+      },
+      {
+        path: 'users/form',
+        component: UsersFormComponent
+      },
+      {
+        path: 'users/form/:id',
+        component: UsersFormComponent
       }
     ]
   }
@@ -105,7 +116,9 @@ const routes: Routes = [
     CategoriesListComponent,
     CategoriesFormComponent,
     ProductsListComponent,
-    ProductsFormComponent
+    ProductsFormComponent,
+    UsersListComponent,
+    UsersFormComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +129,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
     ...UX_MODULES
   ],
-  providers: [CategoriesService, ProductsService, ToastService, MessageService, ConfirmationService],
+  providers: [CategoriesService, ProductsService, UsersService, ToastService, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
