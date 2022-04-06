@@ -1,1 +1,76 @@
-<p>users-form works!</p>
+<div class="admin-page">
+  <p-card [header]="isEditMode ? 'Edit User' : 'Create User'" subheader="Add or edit your users">
+    <div class="grid">
+      <div class="col">
+        <!-- Toolbar -->
+        <p-toolbar>
+          <div class="p-toolbar-group-left"></div>
+          <div class="p-toolbar-group-right">
+            <p-button
+              icon="pi pi-check"
+              styleClass="p-button"
+              class="mr-2"
+              [label]="isEditMode ? 'Update' : 'Create'"
+              (onClick)="isEditMode ? updateUser() : createUser()"
+            ></p-button>
+            <p-button
+              icon="pi pi-times"
+              styleClass="p-button-secondary p-button-outlined"
+              label="Cancel"
+              (onClick)="goBack()"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="form">
+      <div class="grid p-fluid mt-4">
+        <!-- Name -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="name">Name</label>
+            <input formControlName="name" id="name" type="text" pInputText />
+            <small *ngIf="form.controls['name'].invalid && isSubmitted" class="p-error">Name is required</small>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="email">Email</label>
+            <input formControlName="email" id="email" type="email" pInputText />
+            <small *ngIf="form.controls['email'].invalid && isSubmitted" class="p-error">Email is required</small>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="phone">Phone</label>
+            <input formControlName="phone" id="phone" type="tel" pInputText />
+            <small *ngIf="form.controls['phone'].invalid && isSubmitted" class="p-error">Phone is required</small>
+          </div>
+        </div>
+
+        <!-- Country -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="country">Country</label>
+            <input formControlName="country" id="country" pInputText />
+            <small *ngIf="form.controls['country'].invalid && isSubmitted" class="p-error">Country is required</small>
+          </div>
+        </div>
+
+        <!-- Admin -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="isAdmin">Administrator</label> <br />
+            <p-inputSwitch formControlName="isAdmin" inputId="isAdmin" styleClass="block mt-1"></p-inputSwitch>
+          </div>
+        </div>
+      </div>
+    </form>
+  </p-card>
+</div>

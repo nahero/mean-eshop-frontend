@@ -33,7 +33,7 @@ export class CategoriesFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      id: ['', Validators.required],
+      // id: ['', Validators.required],
       name: ['', Validators.required],
       icon: ['', Validators.required],
       color: ['']

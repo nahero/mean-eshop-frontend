@@ -25,10 +25,19 @@
         <p-table [value]="users" styleClass="p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
           <ng-template pTemplate="header">
             <tr>
-              <th pSortableColumn="name" style="width: 50%">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <!-- Name -->
+              <th pSortableColumn="name" style="width: 25%">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <!-- Email -->
               <th>Email</th>
-              <th style="width: 60px; text-align: center">isAdmin</th>
-              <th>Country</th>
+              <!-- Phone -->
+              <th>Phone</th>
+              <!-- isAdmin -->
+              <th style="width: 100px; text-align: center" pSortableColumn="isAdmin">
+                Admin <p-sortIcon field="isAdmin"></p-sortIcon>
+              </th>
+              <!-- Country -->
+              <th pSortableColumn="country">Country <p-sortIcon field="country"></p-sortIcon></th>
+              <!-- Actions -->
               <th style="width: 120px">Actions</th>
             </tr>
           </ng-template>
@@ -38,12 +47,21 @@
               <td>
                 <strong>{{ user.name }}</strong>
               </td>
+
               <!-- Email -->
-              <td>{user.email}</td>
+              <td class="text-blue-600">{{ user.email }}</td>
+
+              <!-- Phone -->
+              <td>{{ user.phone }}</td>
+
               <!-- isAdmin -->
-              <td style="text-align: center">{user.isAdmin}</td>
+              <td style="text-align: center">
+                <i class="pi pi-star-fill" [ngClass]="{ 'text-blue-500': user.isAdmin }" *ngIf="user.isAdmin"></i>
+              </td>
+
               <!-- Country -->
-              <td>{user.country}</td>
+              <td>{{ user.country }}</td>
+
               <!-- Actions -->
               <td>
                 <p-button
@@ -54,7 +72,6 @@
                 <p-button
                   icon="pi pi-trash"
                   styleClass="p-button-danger p-button-outlined p-button-sm p-button-text"
-                  (onClick)="deleteUser(user.name, user._id)"
                 ></p-button>
               </td>
             </tr>

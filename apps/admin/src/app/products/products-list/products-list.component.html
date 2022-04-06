@@ -39,13 +39,17 @@
               <th pSortableColumn="countInStock" style="text-align: center">
                 In Stock <p-sortIcon field="stock"></p-sortIcon>
               </th>
-              <th pSortableColumn="numReviews" style="width: 100px; text-align: center">
+              <th pSortableColumn="numReviews" style="width: 80px; text-align: center">
                 Rating <p-sortIcon field="rating"></p-sortIcon>
               </th>
               <th pSortableColumn="isFeatured">Featured <p-sortIcon field="featured"></p-sortIcon></th>
-              <th pSortableColumn="dateCreated">Created <p-sortIcon field="dateCreated"></p-sortIcon></th>
-              <th pSortableColumn="price" style="text-align: right">Price <p-sortIcon field="price"></p-sortIcon></th>
-              <th>Actions</th>
+              <th pSortableColumn="dateCreated" style="width: 100px">
+                Created <p-sortIcon field="dateCreated"></p-sortIcon>
+              </th>
+              <th pSortableColumn="price" style="width: 90px; text-align: right">
+                Price <p-sortIcon field="price"></p-sortIcon>
+              </th>
+              <th style="width: 120px">Actions</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-product>

@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 // SERVICES
 import { CategoriesService, ProductsService } from '@nx-repo/products';
+import { UsersService } from '@nx-repo/users';
 // COMPONENTS
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -35,7 +36,6 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { UsersFormComponent } from './users/users-form/users-form.component';
-import { UsersService } from '@nx-repo/users';
 
 const UX_MODULES = [
   CardModule,

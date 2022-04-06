@@ -8,7 +8,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UsersService {
-  apiURLcategories = environment.apiURL + 'users';
+  apiURLusers = environment.apiURL + 'users';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -17,13 +17,13 @@ export class UsersService {
    * @returns all users from database
    */
   getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.apiURLcategories);
+    return this.httpClient.get<User[]>(this.apiURLusers);
   }
   /**
    * Get single user by id
    */
   getUserByID(userID: string): Observable<User> {
-    return this.httpClient.get<User>(`${this.apiURLcategories}/${userID}`);
+    return this.httpClient.get<User>(`${this.apiURLusers}/${userID}`);
   }
 
   /**
@@ -31,14 +31,14 @@ export class UsersService {
    * @param User
    */
   createUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.apiURLcategories, user);
+    return this.httpClient.post<User>(this.apiURLusers, user);
   }
 
   /**
    * Update User by ID
    */
   updateUser(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.apiURLcategories}/${user._id}`, user);
+    return this.httpClient.put<User>(`${this.apiURLusers}/${user._id}`, user);
   }
 
   /**
@@ -46,6 +46,6 @@ export class UsersService {
    * @param UserID is User._id
    */
   deleteUser(userID: string): Observable<User> {
-    return this.httpClient.delete<User>(`${this.apiURLcategories}/${userID}`);
+    return this.httpClient.delete<User>(`${this.apiURLusers}/${userID}`);
   }
 }

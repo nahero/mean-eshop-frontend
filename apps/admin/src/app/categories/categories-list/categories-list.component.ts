@@ -24,7 +24,7 @@ export class CategoriesListComponent implements OnInit {
   }
 
   /**
-   * Gets categories from categoriesService as array of Category int
+   * Gets categories from categoriesService as array of Category
    */
   getCategories() {
     this.categoriesService.getCategories().subscribe((cats) => {
