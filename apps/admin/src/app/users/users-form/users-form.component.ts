@@ -5,6 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastService } from '@nx-repo/ui';
 import { User, UsersService } from '@nx-repo/users';
 import { timer } from 'rxjs';
+import * as countriesLib from 'i18n-iso-countries';
+
+declare const require: (arg0: string) => countriesLib.LocaleData;
 
 @Component({
   selector: 'admin-users-form',
@@ -17,6 +20,7 @@ export class UsersFormComponent implements OnInit {
   isEditMode = false;
   user!: User;
   currentUserID!: string;
+  countries = [{}];
 
   constructor(
     private userService: UsersService,
@@ -29,6 +33,7 @@ export class UsersFormComponent implements OnInit {
   ngOnInit(): void {
     console.log('Users Form initialized');
     this._initFormGroup();
+    this.getCountries();
   }
 
   /**
@@ -37,10 +42,15 @@ export class UsersFormComponent implements OnInit {
   private _initFormGroup() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       isAdmin: [false, Validators.required],
-      country: ['', Validators.required]
+      country: ['', Validators.required],
+      city: [''],
+      street: [''],
+      apartment: [''],
+      zip: [''],
+      password: ['', Validators.required]
     });
     this._checkAndSetEditMode();
   }
@@ -69,6 +79,13 @@ export class UsersFormComponent implements OnInit {
       this.userForm['phone'].setValue(user.phone);
       this.userForm['isAdmin'].setValue(user.isAdmin);
       this.userForm['country'].setValue(user.country);
+      this.userForm['city'].setValue(user.city);
+      this.userForm['street'].setValue(user.street);
+      this.userForm['apartment'].setValue(user.apartment);
+      this.userForm['zip'].setValue(user.zip);
+      // Password is only required when creating a new user, not in editing
+      this.userForm['password'].setValidators([]);
+      this.userForm['password'].updateValueAndValidity();
     });
   }
 
@@ -76,7 +93,10 @@ export class UsersFormComponent implements OnInit {
    * Submits form values
    */
   createUser() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      console.log('Form invalid');
+      return;
+    }
 
     console.log('Form valid, moving on with user creation');
 
@@ -85,7 +105,12 @@ export class UsersFormComponent implements OnInit {
       email: this.userForm['email'].value,
       phone: this.userForm['phone'].value,
       isAdmin: this.userForm['isAdmin'].value,
-      country: this.userForm['country'].value
+      country: this.userForm['country'].value,
+      city: this.userForm['city'].value,
+      street: this.userForm['street'].value,
+      zip: this.userForm['zip'].value,
+      apartment: this.userForm['apartment'].value,
+      password: this.userForm['password'].value
     };
 
     this.userService.createUser(this.user).subscribe({
@@ -113,7 +138,12 @@ export class UsersFormComponent implements OnInit {
       email: this.userForm['email'].value,
       phone: this.userForm['phone'].value,
       isAdmin: this.userForm['isAdmin'].value,
-      country: this.userForm['country'].value
+      country: this.userForm['country'].value,
+      city: this.userForm['city'].value,
+      street: this.userForm['street'].value,
+      zip: this.userForm['zip'].value,
+      apartment: this.userForm['apartment'].value,
+      password: this.userForm['password'].value
     };
 
     this.userService.updateUser(this.user).subscribe({
@@ -127,6 +157,21 @@ export class UsersFormComponent implements OnInit {
         this.toastService.displayMessage('User not updated:', e.message, 'error');
       }
     });
+  }
+
+  /**
+   * get countries iso codes
+   */
+  getCountries() {
+    countriesLib.registerLocale(require('i18n-iso-countries/langs/en.json'));
+    const countriesList = countriesLib.getNames('en', { select: 'official' });
+    this.countries = Object.entries(countriesList).map((entry) => {
+      return {
+        iso: entry[0],
+        name: entry[1]
+      };
+    });
+    // console.log(this.countries);
   }
 
   /**

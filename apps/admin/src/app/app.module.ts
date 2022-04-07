@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 // SERVICES
 import { CategoriesService, ProductsService } from '@nx-repo/products';
 import { UsersService } from '@nx-repo/users';
+
 // COMPONENTS
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -13,6 +14,8 @@ import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { UsersListComponent } from './users/users-list/users-list.component';
+import { UsersFormComponent } from './users/users-form/users-form.component';
 // UX
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -34,8 +37,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
-import { UsersListComponent } from './users/users-list/users-list.component';
-import { UsersFormComponent } from './users/users-form/users-form.component';
+import { PasswordModule } from 'primeng/password';
 
 const UX_MODULES = [
   CardModule,
@@ -51,7 +53,8 @@ const UX_MODULES = [
   InputTextareaModule,
   DropdownModule,
   FileUploadModule,
-  EditorModule
+  EditorModule,
+  PasswordModule
 ];
 
 const routes: Routes = [

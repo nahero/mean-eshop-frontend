@@ -54,12 +54,53 @@
           </div>
         </div>
 
-        <!-- Country -->
+        <!-- Category -->
         <div class="col-6">
           <div class="p-field">
             <label for="country">Country</label>
-            <input formControlName="country" id="country" pInputText />
+            <p-dropdown
+              formControlName="country"
+              [options]="countries"
+              optionLabel="name"
+              optionValue="iso"
+              [filter]="true"
+              filterBy="name"
+              [showClear]="true"
+              placeholder="Select Country"
+            ></p-dropdown>
             <small *ngIf="form.controls['country'].invalid && isSubmitted" class="p-error">Country is required</small>
+          </div>
+        </div>
+
+        <!-- City -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="city">City</label>
+            <input formControlName="city" id="city" pInputText />
+          </div>
+        </div>
+
+        <!-- Street -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="street">Street</label>
+            <input formControlName="street" id="street" pInputText />
+          </div>
+        </div>
+
+        <!-- Apartment -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="apartment">Apartment</label>
+            <input formControlName="apartment" id="apartment" pInputText />
+          </div>
+        </div>
+
+        <!-- ZIP code -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="zip">ZIP code</label>
+            <input formControlName="zip" id="zip" pInputText />
           </div>
         </div>
 
@@ -68,6 +109,14 @@
           <div class="p-field">
             <label for="isAdmin">Administrator</label> <br />
             <p-inputSwitch formControlName="isAdmin" inputId="isAdmin" styleClass="block mt-1"></p-inputSwitch>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="col-6">
+          <div class="p-field">
+            <label for="password">Password</label>
+            <p-password formControlName="password" id="password" [feedback]="true" [toggleMask]="true"></p-password>
           </div>
         </div>
       </div>

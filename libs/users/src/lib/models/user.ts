@@ -4,6 +4,8 @@ export interface User {
   email?: string;
   phone?: string;
   isAdmin?: boolean;
+  password?: string;
+  token?: string;
   street?: string;
   apartment?: string;
   city?: string;

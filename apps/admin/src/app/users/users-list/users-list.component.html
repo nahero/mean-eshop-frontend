@@ -60,7 +60,7 @@
               </td>
 
               <!-- Country -->
-              <td>{{ user.country }}</td>
+              <td>{{ getCountryName(user.country) }}</td>
 
               <!-- Actions -->
               <td>
@@ -72,6 +72,7 @@
                 <p-button
                   icon="pi pi-trash"
                   styleClass="p-button-danger p-button-outlined p-button-sm p-button-text"
+                  (onClick)="deleteUser(user.name, user._id)"
                 ></p-button>
               </td>
             </tr>
