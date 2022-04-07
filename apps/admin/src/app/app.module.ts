@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 // SERVICES
 import { CategoriesService, ProductsService } from '@nx-repo/products';
-import { UsersService } from '@nx-repo/users';
+import { UsersModule, UsersService } from '@nx-repo/users';
 import { OrdersService } from '@nx-repo/orders';
 
 // COMPONENTS
@@ -95,7 +95,15 @@ const routes: Routes = [
       },
       {
         path: 'orders',
-        component: DashboardComponent
+        component: OrdersListComponent
+      },
+      {
+        path: 'orders/form',
+        component: OrdersFormComponent
+      },
+      {
+        path: 'orders/form/:id',
+        component: OrdersFormComponent
       },
       {
         path: 'users',
@@ -134,6 +142,7 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    UsersModule,
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
     ...UX_MODULES
   ],
