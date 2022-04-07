@@ -38,6 +38,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
 import { PasswordModule } from 'primeng/password';
+import { OrdersListComponent } from './orders/orders-list/orders-list.component';
+import { OrdersFormComponent } from './orders/orders-form/orders-form.component';
 
 const UX_MODULES = [
   CardModule,
@@ -121,7 +123,9 @@ const routes: Routes = [
     ProductsListComponent,
     ProductsFormComponent,
     UsersListComponent,
-    UsersFormComponent
+    UsersFormComponent,
+    OrdersListComponent,
+    OrdersFormComponent
   ],
   imports: [
     BrowserModule,
