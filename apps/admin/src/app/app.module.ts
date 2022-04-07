@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 // SERVICES
 import { CategoriesService, ProductsService } from '@nx-repo/products';
 import { UsersService } from '@nx-repo/users';
+import { OrdersService } from '@nx-repo/orders';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -16,6 +17,8 @@ import { CategoriesListComponent } from './categories/categories-list/categories
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { UsersFormComponent } from './users/users-form/users-form.component';
+import { OrdersListComponent } from './orders/orders-list/orders-list.component';
+import { OrdersFormComponent } from './orders/orders-form/orders-form.component';
 // UX
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -38,8 +41,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
 import { PasswordModule } from 'primeng/password';
-import { OrdersListComponent } from './orders/orders-list/orders-list.component';
-import { OrdersFormComponent } from './orders/orders-form/orders-form.component';
 
 const UX_MODULES = [
   CardModule,
@@ -136,7 +137,15 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
     ...UX_MODULES
   ],
-  providers: [CategoriesService, ProductsService, UsersService, ToastService, MessageService, ConfirmationService],
+  providers: [
+    CategoriesService,
+    ProductsService,
+    UsersService,
+    OrdersService,
+    ToastService,
+    MessageService,
+    ConfirmationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
