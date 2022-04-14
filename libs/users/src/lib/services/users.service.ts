@@ -48,4 +48,11 @@ export class UsersService {
   deleteUser(userID: string): Observable<User> {
     return this.httpClient.delete<User>(`${this.apiURLusers}/${userID}`);
   }
+
+  /**
+   * Login User
+   */
+  loginUser(user: User) {
+    return this.httpClient.post<User>(`${this.apiURLusers}/login`, user);
+  }
 }

@@ -1,3 +1,43 @@
 <div class="login-container">
-  <div class="login-panel"></div>
+  <div class="login-panel">
+    <div class="grid">
+      <div class="col-6">
+        <!-- <img class="login-image" src="/assets/images/taces.jpeg" /> -->
+        <div class="login-image"></div>
+      </div>
+      <div class="col-6">
+        <div class="login-form">
+          <span>Welcome!</span>
+          <h2>Login</h2>
+          <!-- Form -->
+          <form [formGroup]="loginFormGroup">
+            <div class="grid">
+              <!-- Email -->
+              <div class="col-12">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                  <input type="email" pInputText placeholder="Email" formControlName="email" />
+                </div>
+                <small *ngIf="loginForm['email'].invalid && isSubmitted" class="p-error"> Email is required</small>
+              </div>
+              <!-- Password -->
+              <div class="col-12">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                  <input type="password" pInputText placeholder="Password" formControlName="password" />
+                </div>
+                <small *ngIf="loginForm['password'].invalid && isSubmitted" class="p-error">
+                  Password is required</small
+                >
+              </div>
+              <!-- Submit -->
+              <div class="col-12">
+                <p-button styleClass="p-button-primary w-full" label="Submit" (onClick)="onSubmit()"></p-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

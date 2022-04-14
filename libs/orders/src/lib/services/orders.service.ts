@@ -17,6 +17,8 @@ export class OrdersService {
    * @returns all orders from database
    */
   getOrders(): Observable<Order[]> {
+    console.log('Getting Orders...');
+
     return this.httpClient.get<Order[]>(this.apiURLorders);
   }
   /**

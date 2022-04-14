@@ -9,6 +9,19 @@
     width: 650px;
     height: 525px;
     background-color: var(--surface-a);
-    border-radius: 5px;
+    border-radius: 8px;
+    display: grid;
+    overflow: hidden;
+  }
+
+  .login-image {
+    background: url('/assets/images/chill.jpeg');
+    height: calc(100% + 0.5rem);
+    background-size: cover;
+  }
+
+  .login-form {
+    padding-right: 1rem;
+    padding-top: 12vh;
   }
 }
