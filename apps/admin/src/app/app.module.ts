@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 // SERVICES
 import { CategoriesService, ProductsService } from '@nx-repo/products';
-import { UsersModule, UsersService } from '@nx-repo/users';
+import { AuthGuard, UsersModule, UsersService } from '@nx-repo/users';
 import { OrdersService } from '@nx-repo/orders';
 
 // COMPONENTS
@@ -63,6 +63,7 @@ const UX_MODULES = [
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     component: ShellComponent,
     children: [
       {

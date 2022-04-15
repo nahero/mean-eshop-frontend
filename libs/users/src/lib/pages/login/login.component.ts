@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastService } from '@nx-repo/ui';
+import { AuthService } from '../../services/auth.service';
+import { LocalstorageService } from '../../services/localstorage.service';
 
 @Component({
   selector: 'users-login',
@@ -10,7 +13,12 @@ export class LoginComponent implements OnInit {
   loginFormGroup!: FormGroup;
   isSubmitted = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private toastService: ToastService,
+    private localStorageService: LocalstorageService
+  ) {}
 
   ngOnInit(): void {
     console.log('Login Component initialized');
@@ -26,9 +34,22 @@ export class LoginComponent implements OnInit {
    */
   onSubmit() {
     this.isSubmitted = true;
-    // check is form valid
-
-    //
+    // check is form valid - we are using loginFormGroup here, not loginForm
+    if (this.loginFormGroup.invalid) return;
+    // don't forget the .value after email and password :)
+    this.authService.loginUser(this.loginForm['email'].value, this.loginForm['password'].value).subscribe({
+      next: (response) => {
+        this.localStorageService.setToken(response.token);
+        console.log(response);
+      },
+      complete: () => {
+        // this.goBackAfterDelay();
+      },
+      error: (e) => {
+        this.toastService.displayMessage('Error:', 'Invalid username or password', 'error');
+        console.log(e.message);
+      }
+    });
   }
 
   get loginForm() {

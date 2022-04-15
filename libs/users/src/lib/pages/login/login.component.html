@@ -32,7 +32,12 @@
               </div>
               <!-- Submit -->
               <div class="col-12">
-                <p-button styleClass="p-button-primary w-full" label="Submit" (onClick)="onSubmit()"></p-button>
+                <p-button
+                  type="submit"
+                  styleClass="p-button-primary w-full"
+                  label="Submit"
+                  (onClick)="onSubmit()"
+                ></p-button>
               </div>
             </div>
           </form>
@@ -41,3 +46,4 @@
     </div>
   </div>
 </div>
+<p-toast position="top-center"></p-toast>
