@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastService } from '@nx-repo/ui';
 import { AuthService } from '../../services/auth.service';
 import { LocalstorageService } from '../../services/localstorage.service';
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastService: ToastService,
-    private localStorageService: LocalstorageService
+    private localStorageService: LocalstorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(this.loginForm['email'].value, this.loginForm['password'].value).subscribe({
       next: (response) => {
         this.localStorageService.setToken(response.token);
+        this.router.navigate(['/dashboard']);
         console.log(response);
       },
       complete: () => {

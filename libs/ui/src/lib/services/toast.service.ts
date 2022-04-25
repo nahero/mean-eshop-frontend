@@ -9,7 +9,7 @@ export class ToastService {
 
   /**
    * General toast message, summary is title, detail is body, severity is message visual type
-   * @param severity = 'success', 'info', 'warn', 'error'
+   * @param severity 'success', 'info', 'warn', 'error'
    */
   displayMessage(summary: string, detail: string, severity: string = 'success') {
     this.messageService.add({
